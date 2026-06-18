@@ -1,0 +1,49 @@
+# Environment files
+.env
+*.env
+.env.*
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+crash.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Credentials & Secrets
+*.pem
+*.key
+credentials.json
+service-account.json
+*.p12
+
+# Docker
+.docker/
+
+# Node (if any frontend tooling)
+node_modules/
+
+# Logs
+*.log
