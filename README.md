@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Multi-Cloud Resource Health Monitor
 
 A Terraform-based multi-cloud deployment system with automated failover, disaster recovery, and infrastructure monitoring — deployed across AWS, Azure, and GCP.
@@ -347,18 +346,18 @@ flowchart LR
 ## Technology Stack
 
 | Component | Technology | Justification |
+| Component | Technology | Justification |
 |-----------|-----------|---------------|
-| IaC | Terraform (HCL) | Multi-cloud native; project requirement |
-| Application | Python + Flask | Simple; team familiarity; production-proven |
+| IaC | Terraform 1.15 (HCL) | Multi-cloud native; project requirement |
+| Application | Python 3.14 + Flask 3.2 | Simple; team familiarity; production-proven |
 | Frontend | Jinja2 templates + vanilla JS | No build toolchain; server-rendered |
-| Database | PostgreSQL 15 (containerized) | Portable; pg_dump enables cross-cloud DR |
-| Web Server | Nginx + Gunicorn | Industry standard production pattern |
-| Monitoring | Prometheus + Grafana | Open-source; cloud-agnostic |
+| Database | PostgreSQL 18 (containerized) | Portable; pg_dump enables cross-cloud DR |
+| Web Server | Nginx 1.30 + Gunicorn | Industry standard production pattern |
+| Monitoring | Prometheus + Grafana (latest) | Open-source; cloud-agnostic |
 | DNS | AWS Route53 | Health checks + failover routing |
 | CI/CD | GitHub Actions | Integrated; free tier; team choice |
 | Containers | Docker + Docker Compose | Portable; identical everywhere |
 | Registry | Docker Hub (public) | Accessible from all clouds; free |
-
 ### Cloud Resources (Per Provider)
 
 | Resource | AWS | Azure | GCP |
@@ -536,7 +535,3 @@ Academic project — Hero Vired Capstone.
 ---
 
 *Built using the AI Assisted Engineering Framework v1.0*
-=======
-# multi-cloud-health-monitor
-A lightweight, cloud-agnostic web application deployed across AWS, Azure, and GCP that provides real-time visibility into multi-cloud deployment health, demonstrates automated failover, and serves as the workload for a Terraform-based multi-cloud infrastructure system.
->>>>>>> cad5573704e789558958fe899ac1b36311bd575a

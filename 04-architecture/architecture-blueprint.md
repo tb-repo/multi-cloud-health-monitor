@@ -111,9 +111,9 @@ Each cloud deployment runs the identical stack:
 
 | Container | Image | Port | Purpose |
 |-----------|-------|------|---------|
-| nginx | nginx:alpine | 80 | Reverse proxy, static files |
+| nginx | nginx:1.30-alpine | 80 | Reverse proxy, static files |
 | app | custom (Flask + Gunicorn) | 5000 | Application logic |
-| db | postgres:15-alpine | 5432 | Health check history storage |
+| db | postgres:18-alpine | 5432 | Health check history storage |
 | prometheus | prom/prometheus:latest | 9090 | Metrics collection |
 | grafana | grafana/grafana:latest | 3000 | Metrics visualization |
 
@@ -633,7 +633,7 @@ Source Code → .gitignore covers all secrets
 
 ```bash
 # Clone repo
-git clone https://github.com/team/multi-cloud-health-monitor.git
+git clone https://github.com/tb-repo/multi-cloud-health-monitor.git
 cd multi-cloud-health-monitor/05-engineering
 
 # Start locally
@@ -692,16 +692,17 @@ cd terraform/environments/aws && terraform destroy
 
 | Decision | Choice | Alternatives Considered | Rationale |
 |----------|--------|------------------------|-----------|
-| Application Framework | Flask | FastAPI, Django | Simplest for server-rendered HTML; team familiarity |
+| Application Framework | Flask 3.2 | FastAPI, Django | Simplest for server-rendered HTML; team familiarity |
+| Python Version | 3.14 | 3.13, 3.12 | Latest stable; full library compatibility |
 | Frontend | Jinja2 + vanilla JS | React, Vue | Team lacks frontend dev experience; eliminates risk |
-| Database | PostgreSQL (container) | SQLite, DynamoDB | Portable, familiar, supports DR backup/restore |
-| Reverse Proxy | Nginx | Traefik, Caddy | Industry standard; simple config |
+| Database | PostgreSQL 18 (container) | SQLite, DynamoDB | Portable, familiar, supports DR backup/restore |
+| Reverse Proxy | Nginx 1.30 | Traefik, Caddy | Industry standard; simple config |
 | WSGI Server | Gunicorn | uWSGI, Waitress | Most common Flask deployment pattern |
 | Container Orchestration | Docker Compose | Kubernetes, ECS | Simple; team can manage; portable |
-| Monitoring | Prometheus + Grafana | CloudWatch, DataDog | Open-source; cloud-agnostic; project requirement |
+| Monitoring | Prometheus + Grafana (latest) | CloudWatch, DataDog | Open-source; cloud-agnostic; project requirement |
 | DNS Failover | Route53 | CloudFlare, Azure DNS | Integrated with AWS; health check + failover built-in |
 | CI/CD | GitHub Actions | GitLab CI, Jenkins | Integrated with GitHub; free tier; team decision |
-| IaC | Terraform | Pulumi, CloudFormation | Project requirement; multi-cloud native |
+| IaC | Terraform 1.15 | Pulumi, CloudFormation | Project requirement; multi-cloud native |
 | Container Registry | Docker Hub | ECR, ACR, GCR | Simplest; accessible from all clouds; free tier |
 
 ---
