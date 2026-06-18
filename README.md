@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Multi-Cloud Resource Health Monitor
 
 A Terraform-based multi-cloud deployment system with automated failover, disaster recovery, and infrastructure monitoring — deployed across AWS, Azure, and GCP.
@@ -535,3 +536,7 @@ Academic project — Hero Vired Capstone.
 ---
 
 *Built using the AI Assisted Engineering Framework v1.0*
+=======
+# multi-cloud-health-monitor
+A lightweight, cloud-agnostic web application deployed across AWS, Azure, and GCP that provides real-time visibility into multi-cloud deployment health, demonstrates automated failover, and serves as the workload for a Terraform-based multi-cloud infrastructure system.
+>>>>>>> cad5573704e789558958fe899ac1b36311bd575a
