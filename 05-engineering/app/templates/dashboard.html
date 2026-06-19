@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Multi-Cloud Health Monitor{% endblock %}
+
+{% block content %}
+<!-- Cloud Status Cards -->
+<section class="cloud-status">
+    <h2>Cloud Deployment Status</h2>
+    <div class="status-grid">
+        {% for cloud in ['aws', 'azure', 'gcp'] %}
+        <div class="status-card {{ cloud_status[cloud].status }}">
+            <div class="cloud-name">{{ cloud | upper }}</div>
+            <div class="status-indicator">
+                {% if cloud_status[cloud].status == 'healthy' %}
+                    <span class="dot green"></span> Healthy
+                {% elif cloud_status[cloud].status == 'unhealthy' %}
+                    <span class="dot red"></span> Unhealthy
+                {% elif cloud_status[cloud].status == 'timeout' %}
+                    <span class="dot yellow"></span> Timeout
+                {% else %}
+                    <span class="dot grey"></span> Unknown
+                {% endif %}
+            </div>
+            <div class="response-time">
+                {% if cloud_status[cloud].response_time_ms %}
+                    {{ cloud_status[cloud].response_time_ms }}ms
+                {% else %}
+                    --
+                {% endif %}
+            </div>
+            <div class="last-check">
+                {% if cloud_status[cloud].timestamp %}
+                    {{ cloud_status[cloud].timestamp[:19] }}
+                {% else %}
+                    No data
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Deployment Info -->
+<section class="deployment-info">
+    <h2>Current Serving Instance</h2>
+    <div class="info-grid">
+        <div class="info-item">
+            <label>Cloud Provider</label>
+            <span class="value">{{ deployment.cloud_provider | upper }}</span>
+        </div>
+        <div class="info-item">
+            <label>Region</label>
+            <span class="value">{{ deployment.region }}</span>
+        </div>
+        <div class="info-item">
+            <label>Instance ID</label>
+            <span class="value">{{ deployment.instance_id }}</span>
+        </div>
+        <div class="info-item">
+            <label>Version</label>
+            <span class="value">{{ deployment.version }}</span>
+        </div>
+    </div>
+</section>
+
+<!-- Last Failover -->
+<section class="failover-section">
+    <h2>Last Failover Event</h2>
+    {% if last_failover %}
+    <div class="failover-card">
+        <p><strong>{{ last_failover.from_cloud | upper }}</strong> &rarr; <strong>{{ last_failover.to_cloud | upper }}</strong></p>
+        <p>Time: {{ last_failover.timestamp.strftime('%Y-%m-%d %H:%M:%S UTC') }}</p>
+        <p>Reason: {{ last_failover.reason or 'Not specified' }}</p>
+        {% if last_failover.duration_seconds %}
+        <p>Duration: {{ last_failover.duration_seconds }}s</p>
+        {% endif %}
+    </div>
+    {% else %}
+    <p class="no-data">No failover events recorded.</p>
+    {% endif %}
+</section>
+
+<!-- Health Check History -->
+<section class="history-section">
+    <h2>Health Check History (Last 50)</h2>
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>From</th>
+                <th>Target</th>
+                <th>Status</th>
+                <th>Response</th>
+            </tr>
+        </thead>
+        <tbody id="health-history">
+            {% for check in recent_checks %}
+            <tr class="row-{{ check.status }}">
+                <td>{{ check.timestamp.strftime('%H:%M:%S') }}</td>
+                <td>{{ check.cloud_provider | upper }}</td>
+                <td>{{ check.target_cloud | upper }}</td>
+                <td>
+                    <span class="status-pill {{ check.status }}">{{ check.status }}</span>
+                </td>
+                <td>{{ check.response_time_ms or '--' }}ms</td>
+            </tr>
+            {% endfor %}
+            {% if not recent_checks %}
+            <tr>
+                <td colspan="5" class="no-data">No health checks recorded yet. Configure HEALTH_TARGET_* environment variables.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</section>
+
+<div class="auto-refresh-note">
+    <p>Dashboard auto-refreshes every 30 seconds. Last refresh: <span id="last-refresh">--</span></p>
+</div>
+{% endblock %}

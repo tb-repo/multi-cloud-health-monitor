@@ -1,0 +1,12 @@
+# Multi-Cloud Resource Health Monitor - Python Dependencies
+# Pinned to exact versions for reproducible builds
+
+Flask==3.1.1
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.1.0
+psycopg2-binary==2.9.10
+gunicorn==23.0.0
+prometheus-flask-exporter==0.23.2
+requests==2.32.3
+python-dotenv==1.1.0
+APScheduler==3.11.0
