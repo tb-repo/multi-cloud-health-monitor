@@ -693,7 +693,7 @@ cd terraform/environments/aws && terraform destroy
 | Decision | Choice | Alternatives Considered | Rationale |
 |----------|--------|------------------------|-----------|
 | Application Framework | Flask 3.2 | FastAPI, Django | Simplest for server-rendered HTML; team familiarity |
-| Python Version | 3.14 | 3.13, 3.12 | Latest stable; full library compatibility |
+| Python Version | 3.13 | 3.12, 3.14 | Latest stable; full library compatibility |
 | Frontend | Jinja2 + vanilla JS | React, Vue | Team lacks frontend dev experience; eliminates risk |
 | Database | PostgreSQL 18 (container) | SQLite, DynamoDB | Portable, familiar, supports DR backup/restore |
 | Reverse Proxy | Nginx 1.30 | Traefik, Caddy | Industry standard; simple config |

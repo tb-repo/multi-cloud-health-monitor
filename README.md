@@ -349,7 +349,7 @@ flowchart LR
 | Component | Technology | Justification |
 |-----------|-----------|---------------|
 | IaC | Terraform 1.15 (HCL) | Multi-cloud native; project requirement |
-| Application | Python 3.14 + Flask 3.2 | Simple; team familiarity; production-proven |
+| Application | Python 3.13 + Flask 3.2 | Simple; team familiarity; production-proven |
 | Frontend | Jinja2 templates + vanilla JS | No build toolchain; server-rendered |
 | Database | PostgreSQL 18 (containerized) | Portable; pg_dump enables cross-cloud DR |
 | Web Server | Nginx 1.30 + Gunicorn | Industry standard production pattern |
